@@ -9,7 +9,7 @@
     #menu {
       position: absolute;
       top: 10px;
-      left: 10px;
+      right: 10px;
       background-color: #333;
       color: white;
       padding: 10px;
@@ -22,12 +22,12 @@
       display: none;
       position: absolute;
       top: 40px;
-      left: 10px;
+      right: 10px;
       background-color: #333;
       color: white;
       border-radius: 5px;
       padding: 10px;
-      min-width: 100px;
+      min-width: 120px;
     }
 
     #menuDropdown a {
@@ -57,128 +57,135 @@
   </style>
 </head>
 <body>
-<!-- Menu button to open dropdown -->
-<div id="menu">Menu</div>
-<div id="menuDropdown">
-  <a href="#" onclick="start2048()">2048</a>
-  <a href="#" onclick="startTetris()">Tetris</a>
-</div>
-
-<!-- 2048 Game Content -->
-<div id="mobilewrap">
-  <div id="container">
-    <div class="score">
-      <p> <span class="title">Score</span><span class="scorefield">0</span></p>
-    </div>
-    <div class="newgame">
-      <div class="button"><span>New Game</span></div>
-    </div>
-    <div class="grid">
-      <div class="row">
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-      </div>
-      <div class="row">
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-      </div>
-      <div class="row">
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-      </div>
-      <div class="row">
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-        <div class="base"></div>
-      </div>
-    </div>
-    <div class="tiles"></div>
-    <div class="over"><span>Game Over</span></div>
-    <div class="won"><span class="winner">You win!</span><span class="bestscore">BEST SCORE: </span><span class="numbest"> </span></div>
+  <!-- Menu button to open dropdown -->
+  <div id="menu">Menu</div>
+  <div id="menuDropdown">
+    <a href="#" onclick="start2048()">2048</a>
+    <a href="#" onclick="startTetris()">Tetris</a>
+    <a href="#" onclick="changeBackgroundColor('black')">Black</a>
+    <a href="#" onclick="changeBackgroundColor('white')">White</a>
+    <a href="#" onclick="changeBackgroundColor('brown')">Brown</a>
+    <a href="#" onclick="changeBackgroundColor('blue')">Blue</a>
+    <a href="#" onclick="changeBackgroundColor('red')">Red</a>
   </div>
-</div>
 
-<!-- Tetris Game Content -->
-<div id="tetrisGame">
-  <canvas width="320" height="640" id="game"></canvas>
-</div>
+  <!-- 2048 Game Content -->
+  <div id="mobilewrap">
+    <div id="container">
+      <div class="score">
+        <p> <span class="title">Score</span><span class="scorefield">0</span></p>
+      </div>
+      <div class="newgame">
+        <div class="button"><span>New Game</span></div>
+      </div>
+      <div class="grid">
+        <div class="row">
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+        </div>
+        <div class="row">
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+        </div>
+        <div class="row">
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+        </div>
+        <div class="row">
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+          <div class="base"></div>
+        </div>
+      </div>
+      <div class="tiles"></div>
+      <div class="over"><span>Game Over</span></div>
+      <div class="won"><span class="winner">You win!</span><span class="bestscore">BEST SCORE: </span><span class="numbest"> </span></div>
+    </div>
+  </div>
 
-<!-- Script for handling the game switching logic -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js'></script>
-<script src='https://use.fontawesome.com/a3bbfa8680.js'></script>
-<script src="./script.js"></script>
+  <!-- Tetris Game Content -->
+  <div id="tetrisGame">
+    <canvas width="320" height="640" id="game"></canvas>
+  </div>
 
-<script>
-  // Toggle menu dropdown visibility
-  document.getElementById('menu').addEventListener('click', function() {
-    document.getElementById('menu').classList.toggle('active');
-  });
+  <!-- Script for handling the game switching logic -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js'></script>
+  <script src='https://use.fontawesome.com/a3bbfa8680.js'></script>
+  <script src="./script.js"></script>
 
-  // Function to start 2048 game
-  function start2048() {
-    // Hide Tetris and show 2048
-    document.getElementById('tetrisGame').style.display = 'none';
-    document.getElementById('mobilewrap').style.display = 'block';
-    
-    // Call any initialization code for the 2048 game here
-    start2048Game();
-  }
+  <script>
+    // Toggle menu dropdown visibility
+    document.getElementById('menu').addEventListener('click', function() {
+      document.getElementById('menu').classList.toggle('active');
+    });
 
-  // Function to start Tetris game
-  function startTetris() {
-    // Hide 2048 and show Tetris
-    document.getElementById('mobilewrap').style.display = 'none';
-    document.getElementById('tetrisGame').style.display = 'block';
-    
-    // Call any initialization code for the Tetris game here
-    initializeTetrisGame(); // Function that initializes Tetris game
-  }
-
-  // Example function for starting 2048 game
-  function start2048Game() {
-    console.log("2048 game started!");
-    // You can add your 2048 game initialization code here, such as creating a new game board, resetting the score, etc.
-    // For example, initialize the score and game state
-    // reset2048GameState();
-  }
-
-  // Example function to initialize Tetris game
-  function initializeTetrisGame() {
-    console.log("Tetris game started!");
-    // Initialize Tetris game variables here and start the game loop
-    const canvas = document.getElementById('game');
-    const context = canvas.getContext('2d');
-    const grid = 32;
-    const tetrominoSequence = [];
-
-    const playfield = [];
-    for (let row = -2; row < 20; row++) {
-      playfield[row] = [];
-      for (let col = 0; col < 10; col++) {
-        playfield[row][col] = 0;
-      }
+    // Function to start 2048 game
+    function start2048() {
+      // Hide Tetris and show 2048
+      document.getElementById('tetrisGame').style.display = 'none';
+      document.getElementById('mobilewrap').style.display = 'block';
+      
+      // Call any initialization code for the 2048 game here
+      start2048Game();
     }
 
-    // Add your Tetris game logic here (e.g., tetrominos, game loop, controls, etc.)
-    // Example:
-    // let tetromino = getNextTetromino();
-    // let gameOver = false;
+    // Function to start Tetris game
+    function startTetris() {
+      // Hide 2048 and show Tetris
+      document.getElementById('mobilewrap').style.display = 'none';
+      document.getElementById('tetrisGame').style.display = 'block';
+      
+      // Call any initialization code for the Tetris game here
+      initializeTetrisGame(); // Function that initializes Tetris game
+    }
 
-    // Start the game loop for Tetris (you can integrate the Tetris game logic that you already provided)
-    // gameLoop();
-  }
+    // Example function for starting 2048 game
+    function start2048Game() {
+      console.log("2048 game started!");
+      // You can add your 2048 game initialization code here, such as creating a new game board, resetting the score, etc.
+      // For example, initialize the score and game state
+      // reset2048GameState();
+    }
 
-  // Additional functions for controlling the 2048 game can be added here.
-</script>
+    // Example function to initialize Tetris game
+    function initializeTetrisGame() {
+      console.log("Tetris game started!");
+      // Initialize Tetris game variables here and start the game loop
+      const canvas = document.getElementById('game');
+      const context = canvas.getContext('2d');
+      const grid = 32;
+      const tetrominoSequence = [];
+
+      const playfield = [];
+      for (let row = -2; row < 20; row++) {
+        playfield[row] = [];
+        for (let col = 0; col < 10; col++) {
+          playfield[row][col] = 0;
+        }
+      }
+
+      // Add your Tetris game logic here (e.g., tetrominos, game loop, controls, etc.)
+      // Example:
+      // let tetromino = getNextTetromino();
+      // let gameOver = false;
+
+      // Start the game loop for Tetris (you can integrate the Tetris game logic that you already provided)
+      // gameLoop();
+    }
+
+    // Function to change background color of the game
+    function changeBackgroundColor(color) {
+      document.body.style.backgroundColor = color;
+    }
+  </script>
 
 </body>
 </html>
-
