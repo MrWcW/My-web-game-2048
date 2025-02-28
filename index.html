@@ -4,9 +4,57 @@
   <meta charset="UTF-8">
   <title>Responsive 2048 with Mobile Touch support</title>
   <link rel="stylesheet" href="./style.css">
+  <style>
+    /* Menu styling */
+    #menu {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    
+    #menuDropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 10px;
+      background-color: #333;
+      color: white;
+      border-radius: 5px;
+      padding: 10px;
+      min-width: 100px;
+    }
+
+    #menuDropdown a {
+      display: block;
+      padding: 5px;
+      text-decoration: none;
+      color: white;
+    }
+
+    #menuDropdown a:hover {
+      background-color: #444;
+    }
+
+    #menu.active + #menuDropdown {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-<!-- partial:index.partial.html -->
+<!-- Menu button to open dropdown -->
+<div id="menu">Menu</div>
+<div id="menuDropdown">
+  <a href="#" onclick="start2048()">2048</a>
+  <a href="#" onclick="startTetris()">Tetris</a>
+</div>
+
+<!-- 2048 Game Content -->
 <div id="mobilewrap">
   <div id="container">
     <div class="score">
@@ -46,10 +94,60 @@
     <div class="won"><span class="winner">You win!</span><span class="bestscore">BEST SCORE: </span><span class="numbest"> </span></div>
   </div>
 </div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js'></script>
-<script src='https://use.fontawesome.com/a3bbfa8680.js'></script><script  src="./script.js"></script>
 
+<!-- Tetris Game Content -->
+<div id="tetrisGame" style="display: none;">
+  <!-- Tetris canvas and game content goes here -->
+  <canvas width="320" height="640" id="game"></canvas>
+</div>
+
+<!-- Script for handling the game switching logic -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js'></script>
+<script src='https://use.fontawesome.com/a3bbfa8680.js'></script>
+<script src="./script.js"></script>
+
+<script>
+  // Toggle menu dropdown visibility
+  document.getElementById('menu').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('active');
+  });
+
+  // Function to start 2048 game
+  function start2048() {
+    // Hide Tetris and show 2048
+    document.getElementById('tetrisGame').style.display = 'none';
+    document.getElementById('mobilewrap').style.display = 'block';
+    // Call any initialization code for the 2048 game here
+  }
+
+  // Function to start Tetris game
+  function startTetris() {
+    // Hide 2048 and show Tetris
+    document.getElementById('mobilewrap').style.display = 'none';
+    document.getElementById('tetrisGame').style.display = 'block';
+    // Call any initialization code for the Tetris game here
+    initializeTetrisGame(); // Assuming a function that initializes Tetris game
+  }
+
+  // Assuming this is your Tetris initialization function
+  function initializeTetrisGame() {
+    // Your Tetris game code goes here (as in the Tetris code you shared)
+    const canvas = document.getElementById('game');
+    const context = canvas.getContext('2d');
+    const grid = 32;
+    const tetrominoSequence = [];
+
+    const playfield = [];
+    for (let row = -2; row < 20; row++) {
+      playfield[row] = [];
+      for (let col = 0; col < 10; col++) {
+        playfield[row][col] = 0;
+      }
+    }
+
+    // your Tetris game logic here...
+  }
+</script>
 </body>
 </html>
