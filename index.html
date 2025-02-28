@@ -44,6 +44,16 @@
     #menu.active + #menuDropdown {
       display: block;
     }
+
+    /* Hides Tetris Game Initially */
+    #tetrisGame {
+      display: none;
+    }
+
+    /* Hides 2048 Game Initially */
+    #mobilewrap {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -96,8 +106,7 @@
 </div>
 
 <!-- Tetris Game Content -->
-<div id="tetrisGame" style="display: none;">
-  <!-- Tetris canvas and game content goes here -->
+<div id="tetrisGame">
   <canvas width="320" height="640" id="game"></canvas>
 </div>
 
@@ -118,7 +127,9 @@
     // Hide Tetris and show 2048
     document.getElementById('tetrisGame').style.display = 'none';
     document.getElementById('mobilewrap').style.display = 'block';
+    
     // Call any initialization code for the 2048 game here
+    start2048Game();
   }
 
   // Function to start Tetris game
@@ -126,13 +137,23 @@
     // Hide 2048 and show Tetris
     document.getElementById('mobilewrap').style.display = 'none';
     document.getElementById('tetrisGame').style.display = 'block';
+    
     // Call any initialization code for the Tetris game here
-    initializeTetrisGame(); // Assuming a function that initializes Tetris game
+    initializeTetrisGame(); // Function that initializes Tetris game
   }
 
-  // Assuming this is your Tetris initialization function
+  // Example function for starting 2048 game
+  function start2048Game() {
+    console.log("2048 game started!");
+    // You can add your 2048 game initialization code here, such as creating a new game board, resetting the score, etc.
+    // For example, initialize the score and game state
+    // reset2048GameState();
+  }
+
+  // Example function to initialize Tetris game
   function initializeTetrisGame() {
-    // Your Tetris game code goes here (as in the Tetris code you shared)
+    console.log("Tetris game started!");
+    // Initialize Tetris game variables here and start the game loop
     const canvas = document.getElementById('game');
     const context = canvas.getContext('2d');
     const grid = 32;
@@ -146,8 +167,18 @@
       }
     }
 
-    // your Tetris game logic here...
+    // Add your Tetris game logic here (e.g., tetrominos, game loop, controls, etc.)
+    // Example:
+    // let tetromino = getNextTetromino();
+    // let gameOver = false;
+
+    // Start the game loop for Tetris (you can integrate the Tetris game logic that you already provided)
+    // gameLoop();
   }
+
+  // Additional functions for controlling the 2048 game can be added here.
 </script>
+
 </body>
 </html>
+
